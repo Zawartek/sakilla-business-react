@@ -11,7 +11,6 @@ import './App.css';
 
 import Login from './pages/Login';
 import Layout from './pages/Layout';
-import ActorManagement from './pages/ActorManagement';
 
 import * as authService from './services/authService';
 
@@ -38,7 +37,6 @@ class App extends Component {
         <Router>
           <Switch>
             <Route path="/login" component={Login} />
-            <Route path="/actorManagement" component={ActorManagement} />
             <Private />
           </Switch>
         </Router>

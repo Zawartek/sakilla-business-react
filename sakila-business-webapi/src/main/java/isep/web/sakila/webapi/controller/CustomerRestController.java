@@ -33,7 +33,7 @@ public class CustomerRestController
 	
 	private static final Log	log	= LogFactory.getLog(CustomerRestController.class);
 
-	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
+	@RequestMapping(value = "/customer", method = RequestMethod.GET)
 	public ResponseEntity<List<CustomerWO>> listAllCustomers()
 	{
 		List<CustomerWO> customers = customerService.findAllCustomers();

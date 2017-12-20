@@ -4,24 +4,12 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import * as authService from '../services/authService';
 
-import Auth, { PrivateRoute } from '../components/Auth';
-
-
-import colors from '../colors';
+import ActorManagement from './ActorManagement';
+import CustomerManagement from './CustomerManagement';
 
 const CONTAINER_STYLE = {
   marginTop: 60,
   minHeight: '80vh',
-}
-
-const COPYRIGHT_STYLE = {
-  color: colors.GREY_DARK,
-  margin: 0,
-  padding: 20,
-  fontSize: 13,
-  marginTop: 50,
-
-  textAlign: 'center',
 }
 
 class Layout extends Component {
@@ -47,7 +35,11 @@ class Layout extends Component {
           <Redirect to={{ pathname: '/login', state: { expired: true } }} />
         }
         <div style={CONTAINER_STYLE}>
-        "TOTO"
+          <Switch>
+            <Route exact path="/" component={ActorManagement} />
+            <Route exact path="/ActorManagement" component={ActorManagement} />
+            <Route exact path="/CustomerManagement" component={CustomerManagement} />
+          </Switch>
         </div>
       </div>
     );
