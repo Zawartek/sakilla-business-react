@@ -36,9 +36,9 @@ class Layout extends Component {
         }
         <div style={CONTAINER_STYLE}>
           <Switch>
-            <Route exact path="/" component={ActorManagement} />
-            <Route exact path="/ActorManagement" component={ActorManagement} />
+            <Route exact path="/" component={CustomerManagement} />
             <Route exact path="/CustomerManagement" component={CustomerManagement} />
+            <Route exact path="/ActorManagement" component={ActorManagement} />
           </Switch>
         </div>
       </div>
