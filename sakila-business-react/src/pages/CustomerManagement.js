@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Manager from '../components/Manager'
 import * as customerService from '../services/customerService';
 
-import {Customers, CustomerForm} from '../components/CustomerManager/Customers'
+import Customers from '../components/CustomerManager/Customers'
+import {CustomersForm} from '../components/CustomerManager/CustomersForm'
 
 const BACKGROUND_STYLE = {
     display: 'flex',
@@ -43,7 +44,7 @@ class CustomerManagement extends Component {
   }
 
   renderCustomerForm = () => 
-    <CustomerForm /> 
+    <CustomersForm /> 
 
   renderCustomers = () => 
     this.state.loading === true ? 'Loading Customers ...' : <Customers customers={this.state.customers}/> 

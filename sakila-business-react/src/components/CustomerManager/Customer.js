@@ -9,6 +9,7 @@ import {
 } from 'material-ui/Table';
 
 import RaisedButton from 'material-ui/RaisedButton';
+import {CustomersForm} from './CustomersForm';
 
 const style = {
     margin: 2,
