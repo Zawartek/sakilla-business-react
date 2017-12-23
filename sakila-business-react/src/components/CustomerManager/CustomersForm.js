@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 
 import TextField from 'material-ui/TextField/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
+const style = {
+    margin: 50,
+};
 
 class CustomersForm extends Component {
     
@@ -8,6 +14,8 @@ class CustomersForm extends Component {
         super();
 
         this.state = {
+            firstButton: 'Add',
+            secondButton:'Remove',
             firstName: 'Enter your first name',
             lasttName: 'Enter your last name',
             email: 'Enter your email',
@@ -73,6 +81,10 @@ class CustomersForm extends Component {
             hintText={this.state.country}
             className="textfield-class"
         />
+        <div>
+            <RaisedButton label={this.state.firstButton} labelColor="#FFFFFF" backgroundColor="#3F51B5" style={style} />
+            <RaisedButton label={this.state.secondButton} labelColor="#FFFFFF" backgroundColor="#F44336" style={style} />
+        </div>
 
     </form>
     )

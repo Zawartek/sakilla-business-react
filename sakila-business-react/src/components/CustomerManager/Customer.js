@@ -63,7 +63,7 @@ const CustomerData = (props) => (
             <span>{props.address.address} - {props.address.city.city} {props.address.city.country.country}</span>
         </TableRowColumn>
         <TableRowColumn style={col6}>
-            <RaisedButton label="Edit" labelColor="#FFFFFF" backgroundColor="#3F51B5" style={style} />
+            <RaisedButton label="Edit" labelColor="#FFFFFF" backgroundColor="#3F51B5" style={style} onClick={CustomersForm.handleOnClickOnEdit(props)}/>
             <RaisedButton label="Remove" labelColor="#FFFFFF" backgroundColor="#F44336" style={style} />
         </TableRowColumn>
     </TableRow>
