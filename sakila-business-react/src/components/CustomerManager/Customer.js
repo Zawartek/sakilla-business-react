@@ -8,6 +8,12 @@ import {
     TableRowColumn
 } from 'material-ui/Table';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 2,
+};
+
 const CustomerHeader = (props) => (
     <TableRow>
         <TableHeaderColumn>ID</TableHeaderColumn>
@@ -15,6 +21,7 @@ const CustomerHeader = (props) => (
         <TableHeaderColumn>Name</TableHeaderColumn>
         <TableHeaderColumn>Email</TableHeaderColumn>
         <TableHeaderColumn>Address</TableHeaderColumn>
+        <TableHeaderColumn></TableHeaderColumn>
     </TableRow>
 )
 
@@ -29,7 +36,12 @@ const CustomerData = (props) => (
         <TableRowColumn>
             <span>{props.address.address} - {props.address.city.city} {props.address.city.country.country}</span>
         </TableRowColumn>
+        <TableRowColumn>
+            <RaisedButton label="Edit" labelColor="#FFFFFF" backgroundColor="#4CAF50" style={style} />
+            <RaisedButton label="Remove" labelColor="#FFFFFF" backgroundColor="#F44336" style={style} />
+        </TableRowColumn>
     </TableRow>
+    
 )
 
 CustomerData.propTypes = {
