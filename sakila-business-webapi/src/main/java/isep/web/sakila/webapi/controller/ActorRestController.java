@@ -28,7 +28,7 @@ public class ActorRestController
 
 	private static final Log	log	= LogFactory.getLog(ActorRestController.class);
 
-	@RequestMapping(value = "/actor/", method = RequestMethod.GET)
+	@RequestMapping(value = "/actor", method = RequestMethod.GET)
 	public ResponseEntity<List<ActorWO>> listAllActors()
 	{
 		List<ActorWO> actors = actorService.findAllActors();

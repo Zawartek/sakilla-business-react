@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import Customers from '../components/Customers'
+import Manager from '../components/Manager'
 import * as customerService from '../services/customerService';
+
+import Customers from '../components/CustomerManager/Customers'
 
 const BACKGROUND_STYLE = {
     display: 'flex',
@@ -44,7 +46,7 @@ class CustomerManagement extends Component {
   render() {
     return (
       <div style={BACKGROUND_STYLE, CUSTOMER_MANAGEMENT_STYLE}>
-        {this.renderCustomers()}
+        <Manager renderDatas={this.renderCustomers}/>
       </div>
     )
   }

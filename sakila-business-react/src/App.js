@@ -31,6 +31,9 @@ function Private(props) {
 }
 
 class App extends Component {
+  componentDidMount() {
+    localStorage.clear();
+  }
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
