@@ -9,7 +9,25 @@ import {
     TableBody,
     TableHeader
 } from 'material-ui/Table';
+import TextField from 'material-ui/TextField/TextField';
 
+const ActorForm = (props) => (
+    <form>
+        <span>Name : </span>
+            <TextField
+                name="firstName"
+                type="text"
+                hintText="Enter your first name"
+                className="textfield-class"
+            /> 
+            <TextField
+                name="lasttName"
+                type="text"
+                hintText="Enter your last name"
+                className="textfield-class"
+            />
+    </form>
+)
 
 const displayActorData = (props) => props.actors.map(a => <ActorData key={a.actorId} {...a}/>);
 
@@ -29,4 +47,4 @@ Actors.propTypes = {
     actors: PropTypes.array.isRequired
 }
 
-export default Actors;
+export {Actors, ActorForm};

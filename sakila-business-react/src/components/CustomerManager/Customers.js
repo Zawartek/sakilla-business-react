@@ -11,7 +11,6 @@ import {
 } from 'material-ui/Table';
 
 import TextField from 'material-ui/TextField/TextField';
-import '../../material-ui.css'
 
 const CustomerForm = (props) => (
     <form>

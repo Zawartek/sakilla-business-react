@@ -3,7 +3,6 @@ import Manager from '../components/Manager'
 import * as customerService from '../services/customerService';
 
 import {Customers, CustomerForm} from '../components/CustomerManager/Customers'
-import colors from 'material-ui/styles/colors';
 
 const BACKGROUND_STYLE = {
     display: 'flex',

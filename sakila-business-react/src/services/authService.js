@@ -2,11 +2,11 @@ import axios from 'axios';
 
 export function setToken(token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-  localStorage.setItem('token', token);
+  sessionStorage.setItem('token', token);
 }
 
 export function isLoggedIn() {
-  return !!localStorage.getItem('token')
+  return !!sessionStorage.getItem('token')
 }
 
 export function login(user, password) {
@@ -20,7 +20,7 @@ export function login(user, password) {
 
 export function logout() {
   axios.defaults.headers.common['Authorization'] = null;
-  localStorage.clear();
+  sessionStorage.clear();
 }
 
 export function handle403Errors(on403) {

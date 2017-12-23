@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Manager from '../components/Manager'
 import * as actorService from '../services/actorService';
 
-import Actors from '../components/ActorManager/Actors'
+import {Actors, ActorForm} from '../components/ActorManager/Actors'
 
 const BACKGROUND_STYLE = {
     display: 'flex',
@@ -12,8 +12,9 @@ const BACKGROUND_STYLE = {
 }
     
 const ACTOR_MANAGEMENT_STYLE = {
-    width: 1200,
+    width: 1300,
     margin: 30,
+    backgroundColor: '#E0E0E0',
 }
 
 class ActorManagement extends Component {
@@ -40,13 +41,22 @@ class ActorManagement extends Component {
       }).catch(e => this.setState({ error: true, loading: false }));
   }
 
+  renderActorForm = () => 
+  <ActorForm /> 
+
   renderActors = () => 
     this.state.loading === true ? 'Loading Actors ...' : <Actors actors={this.state.actors}/> 
  
   render() {
     return (
-      <div style={BACKGROUND_STYLE, ACTOR_MANAGEMENT_STYLE}>
-        <Manager renderDatas={this.renderActors}/>
+      <div style={BACKGROUND_STYLE}>
+        <Manager 
+          formHeader="Actor Management Form"
+          listHeader="List of actors"
+          managerStyle={ACTOR_MANAGEMENT_STYLE} 
+          renderForm={this.renderActorForm} 
+          renderDatas={this.renderActors}
+        />
       </div>
     )
   }
