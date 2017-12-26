@@ -4,6 +4,7 @@ import * as customerService from '../services/customerService';
 
 import Customers from '../components/CustomerManager/Customers'
 import {CustomersForm} from '../components/CustomerManager/CustomersForm'
+import { createCustomer } from '../services/customerService';
 
 const BACKGROUND_STYLE = {
     display: 'flex',
@@ -11,7 +12,7 @@ const BACKGROUND_STYLE = {
     justifyContent: 'center',
     minHeight: '90vh',
 }
-    
+
 const CUSTOMER_MANAGEMENT_STYLE = {
     width: 1300,
     margin: 30,
@@ -26,7 +27,7 @@ class CustomerManagement extends Component {
         this.state = {
             loading: true,
             error: false,
-            customers : []
+            customers : [],
         };
     }
 
@@ -43,20 +44,39 @@ class CustomerManagement extends Component {
       }).catch(e => this.setState({ error: true, loading: false }));
   }
 
-  renderCustomerForm = () => 
-    <CustomersForm /> 
+  requestDeleteCustomer(id) {
+    customerService.deleteCustomer(id).then(res =>{
+      customerService.getAllCustomers()
+      .then(res2 => {
+        this.setState({ customers: res2.data, error: false, loading: false });
+        return res2.data;
+      });
+    }).catch(e => this.setState({ error: true, loading: false }));
+  }
 
-  renderCustomers = () => 
-    this.state.loading === true ? 'Loading Customers ...' : <Customers customers={this.state.customers}/> 
- 
+  reloadCustomers = () => {
+    this.requestAllCustomers();
+  }
+
+  renderCustomers = () =>
+    this.state.loading === true
+    ? 'Loading Customers ...'
+    :
+    <Customers
+      customers={this.state.customers}
+      handleEdit={this.refs['customersForm'].handleOnClickOnEdit}
+      handleDelete={this.requestDeleteCustomer}
+      reloadCustomers={this.reloadCustomers}
+      />
+
   render() {
     return (
       <div style={BACKGROUND_STYLE}>
-        <Manager 
+        <Manager
           formHeader="Customer Management Form"
           listHeader="List of customers"
-          managerStyle={CUSTOMER_MANAGEMENT_STYLE} 
-          renderForm={this.renderCustomerForm} 
+          managerStyle={CUSTOMER_MANAGEMENT_STYLE}
+          renderForm={<CustomersForm ref='customersForm'/>}
           renderDatas={this.renderCustomers}
         />
       </div>

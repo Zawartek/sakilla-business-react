@@ -50,6 +50,18 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
+	public CityWO findByCity(String cityName) {
+		log.debug(String.format("Looking for city by name %s", cityName));
+		City city = cityRepository.findOneByCity(cityName);
+
+		if (city != null)
+		{
+			return new CityWO(city);
+		}
+		return null;
+	}
+
+	@Override
 	public void saveCity(CityWO cityWO) {
 		City city = new City();
 		Timestamp time = new Timestamp(System.currentTimeMillis());

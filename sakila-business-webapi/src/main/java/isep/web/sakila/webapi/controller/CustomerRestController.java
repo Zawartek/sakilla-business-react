@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import isep.web.sakila.webapi.model.AddressWO;
+import isep.web.sakila.webapi.model.CityWO;
+import isep.web.sakila.webapi.model.CountryWO;
 import isep.web.sakila.webapi.model.CustomerWO;
+import isep.web.sakila.webapi.model.form.FormCustomer;
 import isep.web.sakila.webapi.service.AddressService;
+import isep.web.sakila.webapi.service.CityService;
+import isep.web.sakila.webapi.service.CountryService;
 import isep.web.sakila.webapi.service.CustomerService;
+import isep.web.sakila.webapi.service.StoreService;
 
 @RestController
 public class CustomerRestController
@@ -30,6 +35,15 @@ public class CustomerRestController
 	
 	@Autowired
 	AddressService addressService;
+
+	@Autowired
+	CityService cityService;
+
+	@Autowired
+	CountryService countryService;
+
+	@Autowired
+	StoreService storeService;
 	
 	private static final Log	log	= LogFactory.getLog(CustomerRestController.class);
 
@@ -59,19 +73,44 @@ public class CustomerRestController
 
 	// -------------------Create a Customer----------------------------------
 
-	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
+	@RequestMapping(value = "/customer", method = RequestMethod.POST)
+	public ResponseEntity<CustomerWO> createCustomer(@RequestBody FormCustomer form, UriComponentsBuilder ucBuilder)
 	{
-		System.out.println("Creating customer " + customerWO.getLastName());
+		System.out.println("Creating customer " + form.getLastName());
+		CustomerWO customer = new CustomerWO();
+		CityWO customerCity = cityService.findByCity(form.getCity());
+		AddressWO customerAddress = new AddressWO();
+		CountryWO customerCountry=null;
+		if (customerCity== null) {
+			customerCity = new CityWO();
+			customerCity.setCity(form.getCity());
+			customerCountry = countryService.findByCountry(form.getCountry());
+			if (customerCountry==null) {
+				customerCountry = new CountryWO();
+				customerCountry.setCountry(form.getCountry());
+				countryService.saveCountry(customerCountry);
+			}
+			customerCity.setCountry(countryService.findByCountry(form.getCountry()));
+			cityService.saveCity(customerCity);
+		}
+		customerAddress.setCity(cityService.findByCity(form.getCity()));
+		customerAddress.setAddress(form.getAddress());
+		customerAddress.setDistrict("");
+		customerAddress.setPhone("");
+		addressService.saveAddress(customerAddress);
+		customer.setAddress(addressService.findByAddressAndCity(form.getAddress(), form.getCity()));
+		
+		// Customer Datas
+		customer.setFirstName(form.getFirstName());
+		customer.setLastName(form.getLastName());
+		customer.setEmail(form.getEmail());
+		customer.setStore(storeService.findById(1));
+		customerService.saveCustomer(customer);
 
-		customerService.saveCustomer(customerWO);
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/customer/{id}").buildAndExpand(customerWO.getCustomerId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<CustomerWO>(customer, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/customerUpdate/", method = RequestMethod.POST)
+	@RequestMapping(value = "/customerUpdate", method = RequestMethod.POST)
 	public ResponseEntity<CustomerWO> updateCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
 	{
 		log.error(String.format("Updating customer %s ", customerWO.getCustomerId()));

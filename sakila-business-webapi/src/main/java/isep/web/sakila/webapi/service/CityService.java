@@ -6,6 +6,8 @@ import isep.web.sakila.webapi.model.CityWO;
 
 public interface CityService {
 	CityWO findById(int id);
+	
+	CityWO findByCity(String cityName);
 
 	void saveCity(CityWO cityWO);
 

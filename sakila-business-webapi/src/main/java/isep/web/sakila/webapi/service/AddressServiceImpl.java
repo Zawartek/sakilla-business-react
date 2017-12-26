@@ -47,6 +47,18 @@ public class AddressServiceImpl implements AddressService {
 		}
 		return null;
 	}
+	
+	@Override
+	public AddressWO findByAddressAndCity(String addr, String city) {
+		log.debug(String.format("Looking for user by address %s and city", addr, city));
+		Address address = addressRepository.findOneByAddressAndCity(addr, cityRepository.findOneByCity(city));
+
+		if (address != null)
+		{
+			return new AddressWO(address);
+		}
+		return null;
+	}
 
 	@Override
 	public void saveAddress(AddressWO addressWO) {

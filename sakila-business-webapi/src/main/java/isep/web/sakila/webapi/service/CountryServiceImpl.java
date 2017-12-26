@@ -47,6 +47,18 @@ public class CountryServiceImpl implements CountryService {
 	}
 
 	@Override
+	public CountryWO findByCountry(String countryName) {
+		log.debug(String.format("Looking for country by name %s", countryName));
+		Country country = countryRepository.findOneByCountry(countryName);
+
+		if (country != null)
+		{
+			return new CountryWO(country);
+		}
+		return null;
+	}
+
+	@Override
 	public void saveCountry(CountryWO countryWO) {
 		Country country = new Country();
 		Timestamp time = new Timestamp(System.currentTimeMillis());

@@ -10,9 +10,14 @@ import {
     TableHeader
 } from 'material-ui/Table';
 
-import TextField from 'material-ui/TextField/TextField';
-
-const displayCustomerData = (props) => props.customers.map(c => <CustomerData key={c.customerId} {...c} />);
+const displayCustomerData = (props) => 
+    props.customers.map(c => 
+        <CustomerData 
+        key={c.customerId} {...c} 
+        handleEdit={props.handleEdit}
+        handleDelete={props.handleDelete}
+        />
+    );
 
 const Customers = (props) =>
     <Table>

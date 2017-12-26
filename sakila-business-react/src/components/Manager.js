@@ -27,7 +27,7 @@ const Manager = (props) =>
             <CardText 
                 expandable={true}
                 style={CARD_STYLE}>
-                {props.renderForm()}
+                {props.renderForm}
             </CardText>
         </Card> 
         <Card zDepth={3}

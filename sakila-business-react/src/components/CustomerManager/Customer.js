@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,6 @@ import {
 } from 'material-ui/Table';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import {CustomersForm} from './CustomersForm';
 
 const style = {
     margin: 2,
@@ -51,24 +50,39 @@ const CustomerHeader = (props) => (
     </TableRow>
 )
 
-const CustomerData = (props) => (
-    <TableRow>
-        <TableRowColumn style={col1}>{props.customerId}</TableRowColumn>
-        <TableRowColumn style={col2}>
-            <span>{props.store.address.address} - {props.store.address.city.city} {props.store.address.city.country.country}</span>
-        </TableRowColumn>
-        <TableRowColumn style={col3}><span>{props.firstName} {props.lastName}</span></TableRowColumn>
-        <TableRowColumn style={col4}>{props.email}</TableRowColumn>
-        <TableRowColumn style={col5}>
-            <span>{props.address.address} - {props.address.city.city} {props.address.city.country.country}</span>
-        </TableRowColumn>
-        <TableRowColumn style={col6}>
-            <RaisedButton label="Edit" labelColor="#FFFFFF" backgroundColor="#3F51B5" style={style} onClick={CustomersForm.handleOnClickOnEdit(props)}/>
-            <RaisedButton label="Remove" labelColor="#FFFFFF" backgroundColor="#F44336" style={style} />
-        </TableRowColumn>
-    </TableRow>
+class CustomerData extends Component {
+    constructor() {
+        super();
+    }
 
-)
+    render () {
+        return (
+            <TableRow>
+                <TableRowColumn style={col1}>{this.props.customerId}</TableRowColumn>
+                <TableRowColumn style={col2}>
+                    <span>{this.props.store.address.address} - {this.props.store.address.city.city} {this.props.store.address.city.country.country}</span>
+                </TableRowColumn>
+                <TableRowColumn style={col3}><span>{this.props.firstName} {this.props.lastName}</span></TableRowColumn>
+                <TableRowColumn style={col4}>{this.props.email}</TableRowColumn>
+                <TableRowColumn style={col5}>
+                    <span>{this.props.address.address} - {this.props.address.city.city} {this.props.address.city.country.country}</span>
+                </TableRowColumn>
+                <TableRowColumn style={col6}>
+                    <RaisedButton label="Edit" labelColor="#FFFFFF" backgroundColor="#3F51B5" style={style} onClick={this.handleOnEditClick}/>
+                    <RaisedButton label="Remove" labelColor="#FFFFFF" backgroundColor="#F44336" style={style} onClick={this.handleOnDeleteClick} />
+                </TableRowColumn>
+            </TableRow>
+        );
+    }
+
+    handleOnEditClick = (e) => {
+        this.props.handleEdit(this.props.customerId);
+    }
+
+    handleOnDeleteClick = (e) => {
+        this.props.handleDelete(this.props.customerId);
+    }
+}
 
 CustomerData.propTypes = {
     customerId: PropTypes.number.isRequired
