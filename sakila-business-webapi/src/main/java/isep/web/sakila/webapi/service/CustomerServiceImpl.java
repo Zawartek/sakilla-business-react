@@ -11,11 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import isep.web.sakila.dao.repositories.AddressRepository;
-import isep.web.sakila.dao.repositories.CityRepository;
 import isep.web.sakila.dao.repositories.CustomerRepository;
 import isep.web.sakila.dao.repositories.StoreRepository;
-import isep.web.sakila.jpa.entities.Address;
-import isep.web.sakila.jpa.entities.City;
 import isep.web.sakila.jpa.entities.Customer;
 import isep.web.sakila.webapi.model.AddressWO;
 import isep.web.sakila.webapi.model.CustomerWO;
@@ -28,8 +25,6 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepository;
 	@Autowired
 	private AddressRepository addressRepository;
-	@Autowired
-	private CityRepository cityRepository;
 	@Autowired
 	private StoreRepository storeRepository;
 

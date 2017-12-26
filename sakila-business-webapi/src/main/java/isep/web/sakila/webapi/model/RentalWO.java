@@ -17,7 +17,7 @@ public class RentalWO extends WebObject {
 	protected Date rentalDate;
 	protected Date returnDate;
 	protected CustomerWO customer;
-	protected InventoryWO inventoryWO;
+	protected InventoryWO inventory;
 	
 	public RentalWO() {
 		super();
@@ -70,18 +70,19 @@ public class RentalWO extends WebObject {
 		this.rentalId = rentalId;
 	}
 
-	public InventoryWO getInventoryWO() {
-		return inventoryWO;
+	public InventoryWO getInventory() {
+		return inventory;
 	}
 
-	public void setInventoryWO(InventoryWO inventoryWO) {
-		this.inventoryWO = inventoryWO;
+	public void setInventory(InventoryWO inventoryWO) {
+		this.inventory = inventoryWO;
 	}
 	
 	public String toString() {
-		return "Rental [id=" + this.rentalId + ", rentalDate=" 
-				+ this.rentalDate + ", returnDate=" 
-				+ this.returnDate + "]";
+		return "Rental [id=" + this.rentalId + 
+				", rentalDate=" 	+ this.rentalDate + 
+				", returnDate=" 	+ this.returnDate +
+				", " + this.getInventory().toString() + "]";
 	}	
 	
 }

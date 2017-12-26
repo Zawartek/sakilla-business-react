@@ -12,6 +12,10 @@ export function createCustomer(form) {
   return axios.post('/customer', form);
 }
 
+export function updateCustomer(form) {
+  return axios.post('/customerUpdate', form);
+}
+
 export function deleteCustomer(id){
   return axios.get(`/customerDelete/${id}`);
 }

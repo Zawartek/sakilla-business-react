@@ -50,9 +50,9 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public CityWO findByCity(String cityName) {
+	public CityWO findByCityAndCountry(String cityName, String countryName) {
 		log.debug(String.format("Looking for city by name %s", cityName));
-		City city = cityRepository.findOneByCity(cityName);
+		City city = cityRepository.findOneByCityAndCountry(cityName, countryRepository.findOneByCountry(countryName));
 
 		if (city != null)
 		{

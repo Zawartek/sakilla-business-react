@@ -6,6 +6,7 @@ import * as authService from '../services/authService';
 
 import ActorManagement from './ActorManagement';
 import CustomerManagement from './CustomerManagement';
+import RentalManagement from './RentalManagement';
 
 const CONTAINER_STYLE = {
   marginTop: 60,
@@ -39,6 +40,7 @@ class Layout extends Component {
             <Route exact path="/" component={CustomerManagement} />
             <Route exact path="/CustomerManagement" component={CustomerManagement} />
             <Route exact path="/ActorManagement" component={ActorManagement} />
+            <Route exact path="/RentalManagement" component={RentalManagement} />
           </Switch>
         </div>
       </div>

@@ -2,7 +2,8 @@ package isep.web.sakila.webapi.model.form;
 
 public class FormCustomer {
 	private int customerId;
-    private String firstName;
+	private int addressId;
+	private String firstName;
     private String lastName;
     private String email;
     private String address;
@@ -14,6 +15,12 @@ public class FormCustomer {
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
+	}
+    public int getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
 	public String getFirstName() {
 		return firstName;

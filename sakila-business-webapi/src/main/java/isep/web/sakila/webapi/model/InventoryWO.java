@@ -11,8 +11,8 @@ public class InventoryWO extends WebObject {
 	
 	protected int inventoryId;
 	
-	protected StoreWO storeWO;
-	protected FilmWO filmWO;
+	protected StoreWO store;
+	protected FilmWO film;
 	
 	InventoryWO() {
 		super();
@@ -27,6 +27,8 @@ public class InventoryWO extends WebObject {
 	public InventoryWO(final Inventory inventory) {
 		this();
 		this.inventoryId = inventory.getInventoryId();
+		this.store = new StoreWO(inventory.getStore());
+		this.film = new FilmWO(inventory.getFilm());
 	}
 
 	public int getInventoryId() {
@@ -37,23 +39,25 @@ public class InventoryWO extends WebObject {
 		this.inventoryId = inventoryId;
 	}
 
-	public StoreWO getStoreWO() {
-		return storeWO;
+	public StoreWO getStore() {
+		return store;
 	}
 
-	public void setStoreWO(StoreWO storeWO) {
-		this.storeWO = storeWO;
+	public void setStore(StoreWO storeWO) {
+		this.store = storeWO;
 	}
 
-	public FilmWO getFilmWO() {
-		return filmWO;
+	public FilmWO getFilm() {
+		return film;
 	}
 
-	public void setFilmWO(FilmWO filmWO) {
-		this.filmWO = filmWO;
+	public void setFilm(FilmWO filmWO) {
+		this.film = filmWO;
 	}
 	
 	public String toString() {
-		return "Rental [id=" + this.inventoryId + "]";
+		return "Inventory [id=" + this.inventoryId + 
+				", storeId=" + this.getStore().getStoreId() + 
+				", filmId=" + this.getFilm().getFilmId() + "]";
 	}	
 }

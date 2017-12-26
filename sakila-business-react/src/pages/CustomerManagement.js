@@ -4,7 +4,6 @@ import * as customerService from '../services/customerService';
 
 import Customers from '../components/CustomerManager/Customers'
 import {CustomersForm} from '../components/CustomerManager/CustomersForm'
-import { createCustomer } from '../services/customerService';
 
 const BACKGROUND_STYLE = {
     display: 'flex',

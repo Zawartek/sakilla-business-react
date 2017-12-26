@@ -78,7 +78,7 @@ public class CustomerRestController
 	{
 		System.out.println("Creating customer " + form.getLastName());
 		CustomerWO customer = new CustomerWO();
-		CityWO customerCity = cityService.findByCity(form.getCity());
+		CityWO customerCity = cityService.findByCityAndCountry(form.getCity(), form.getCountry());
 		AddressWO customerAddress = new AddressWO();
 		CountryWO customerCountry=null;
 		if (customerCity== null) {
@@ -89,11 +89,13 @@ public class CustomerRestController
 				customerCountry = new CountryWO();
 				customerCountry.setCountry(form.getCountry());
 				countryService.saveCountry(customerCountry);
+				customerCountry = countryService.findByCountry(form.getCountry());
 			}
-			customerCity.setCountry(countryService.findByCountry(form.getCountry()));
+			customerCity.setCountry(customerCountry);
 			cityService.saveCity(customerCity);
+			customerCity = cityService.findByCityAndCountry(form.getCity(), form.getCountry());
 		}
-		customerAddress.setCity(cityService.findByCity(form.getCity()));
+		customerAddress.setCity(customerCity);
 		customerAddress.setAddress(form.getAddress());
 		customerAddress.setDistrict("");
 		customerAddress.setPhone("");
@@ -111,32 +113,40 @@ public class CustomerRestController
 	}
 
 	@RequestMapping(value = "/customerUpdate", method = RequestMethod.POST)
-	public ResponseEntity<CustomerWO> updateCustomer(@RequestBody CustomerWO customerWO, UriComponentsBuilder ucBuilder)
+	public ResponseEntity<CustomerWO> updateCustomer(@RequestBody FormCustomer form, UriComponentsBuilder ucBuilder)
 	{
-		log.error(String.format("Updating customer %s ", customerWO.getCustomerId()));
-		CustomerWO currentCustomer = customerService.findById(customerWO.getCustomerId());
-		AddressWO currentAddress = addressService.findById(customerWO.getAddress().getAddressId());
 
-		if (currentCustomer == null)
-		{
-			System.out.println("Customer with id " + customerWO.getCustomerId() + " not found");
-			return new ResponseEntity<CustomerWO>(HttpStatus.NOT_FOUND);
+		System.out.println("Creating customer " + form.getLastName());
+		CustomerWO customer = customerService.findById(form.getCustomerId());
+		AddressWO customerAddress = customer.getAddress();
+		CityWO customerCity = cityService.findByCityAndCountry(form.getCity(), form.getCountry());
+		CountryWO customerCountry=null;
+		if (customerCity== null) {
+			customerCity = new CityWO();
+			customerCity.setCity(form.getCity());
+			customerCountry = countryService.findByCountry(form.getCountry());
+			if (customerCountry==null) {
+				customerCountry = new CountryWO();
+				customerCountry.setCountry(form.getCountry());
+				countryService.saveCountry(customerCountry);
+				customerCountry = countryService.findByCountry(form.getCountry());
+			}
+			customerCity.setCountry(customerCountry);
+			cityService.saveCity(customerCity);
+			customerCity = cityService.findByCityAndCountry(form.getCity(), form.getCountry());
 		}
+		customerAddress.setCity(customerCity);
+		customerAddress.setAddress(form.getAddress());
+		addressService.updateAddress(customerAddress);
 		
-		currentAddress.setAddress(customerWO.getAddress().getAddress());
-		currentAddress.setAddress2(customerWO.getAddress().getAddress2());
-		currentAddress.setCity(customerWO.getAddress().getCity());
-		addressService.updateAddress(currentAddress);
-		
-		currentCustomer.setLastName(customerWO.getLastName());
-		currentCustomer.setFirstName(customerWO.getFirstName());
-		currentCustomer.setEmail(customerWO.getEmail());
-		currentCustomer.setAddress(currentAddress);
-		//currentCustomer.setStore(customerWO.getStore());
+		// Customer Datas
+		customer.setFirstName(form.getFirstName());
+		customer.setLastName(form.getLastName());
+		customer.setEmail(form.getEmail());
+		customer.setAddress(customerAddress);
+		customerService.updateCustomer(customer);
 
-		customerService.updateCustomer(currentCustomer);
-
-		return new ResponseEntity<CustomerWO>(currentCustomer, HttpStatus.OK);
+		return new ResponseEntity<CustomerWO>(customer, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/customerDelete/{id}", method = RequestMethod.GET)
