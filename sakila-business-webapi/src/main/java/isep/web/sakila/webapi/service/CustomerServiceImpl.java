@@ -53,12 +53,15 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerWO findById(int id) {
 		log.debug(String.format("Looking for user by Id %s", id));
 		Customer customer = customerRepository.findOne(id);
+		CustomerWO currentCustomer = null;
 
 		if (customer != null)
 		{
-			return new CustomerWO(customer);
+			currentCustomer = new CustomerWO(customer);
+			currentCustomer.setAddress(new AddressWO(customer.getAddress()));
+			currentCustomer.setStore(new StoreWO(customer.getStore()));
 		}
-		return null;
+		return currentCustomer;
 	}
 
 	@Override
