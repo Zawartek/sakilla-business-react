@@ -73,7 +73,6 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setFirstName(userWO.getFirstName());
 		customer.setEmail(userWO.getEmail());
 		if (userWO.getAddress() !=null) {
-			saveAddress(userWO.getAddress());
 			customer.setAddress(addressRepository.findOne(userWO.getAddress().getAddressId()));
 		}
 		if (userWO.getStore()!=null) {
@@ -93,7 +92,6 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setFirstName(userWO.getFirstName());
 		customer.setEmail(userWO.getEmail());
 		if (userWO.getAddress() !=null) {
-			saveAddress(userWO.getAddress());
 			customer.setAddress(addressRepository.findOne(userWO.getAddress().getAddressId()));
 		}
 		if (userWO.getStore()!=null) {
@@ -109,20 +107,4 @@ public class CustomerServiceImpl implements CustomerService {
 		log.debug(String.format("Delete user with Id %s", id));
 		customerRepository.delete(id);
 	}
-	
-	private void saveAddress(AddressWO addressWO) {
-		Address address = new Address();
-		City city = null;
-		Timestamp time = new Timestamp(System.currentTimeMillis());
-		address.setAddress(addressWO.getAddress());
-		address.setAddress2(addressWO.getAddress2());
-		address.setDistrict(addressWO.getDistrict());
-		address.setPostalCode(addressWO.getPostalCode());
-		address.setPhone(addressWO.getPhone());
-		city = cityRepository.findOneByCity(addressWO.getCity().getCity());
-		address.setCity(city);
-		address.setLastUpdate(time);
-		addressRepository.save(address);
-	}
-
 }

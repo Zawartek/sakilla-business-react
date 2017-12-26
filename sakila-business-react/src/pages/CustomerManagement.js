@@ -29,6 +29,8 @@ class CustomerManagement extends Component {
             error: false,
             customers : [],
         };
+        this.requestAllCustomers = this.requestAllCustomers.bind(this);
+        this.requestDeleteCustomer = this.requestDeleteCustomer.bind(this);
     }
 
   componentDidMount() {
@@ -76,7 +78,12 @@ class CustomerManagement extends Component {
           formHeader="Customer Management Form"
           listHeader="List of customers"
           managerStyle={CUSTOMER_MANAGEMENT_STYLE}
-          renderForm={<CustomersForm ref='customersForm'/>}
+          renderForm={
+            <CustomersForm 
+              ref='customersForm'
+              reloadCustomers={this.reloadCustomers}
+              />
+            }
           renderDatas={this.renderCustomers}
         />
       </div>

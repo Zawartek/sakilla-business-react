@@ -30,11 +30,23 @@ class CustomersForm extends Component {
 
     handleOnClickOnAdd = (e) =>{
         customerService.createCustomer(this.state.formData).then(res=>{
-            
+        this.setState({
+            adding:true,
+            formData: {
+                customerId:-1,
+                firstName: '',
+                lastName: '',
+                email: '',
+                address: '',
+                city: '',
+                country: ''
+            }
+        });
+        this.props.reloadCustomers();
         })
     }
 
-    handleOnClickOnRemove = (e) => {
+    handleOnClickOnReset = (e) => {
         this.setState({
             adding:true,
             formData: {
@@ -164,11 +176,11 @@ class CustomersForm extends Component {
                 />
             }
             <RaisedButton 
-                label='Remove'
+                label='Reset'
                 labelColor="#FFFFFF" 
                 backgroundColor="#F44336" 
                 style={style} 
-                onClick = {this.handleOnClickOnRemove}
+                onClick = {this.handleOnClickOnReset}
                 />
         </div>
 

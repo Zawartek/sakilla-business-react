@@ -153,6 +153,7 @@ public class CustomerRestController
 		}
 
 		customerService.deleteCustomerById(id);
+		addressService.deleteAddressById(customerWO.getAddress().getAddressId());
 		return new ResponseEntity<CustomerWO>(HttpStatus.NO_CONTENT);
 	}
 }
