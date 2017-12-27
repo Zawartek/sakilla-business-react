@@ -54,5 +54,28 @@ describe('Mock Tests Rent', function() {
             expect(response.data.customer.email).toEqual("CHARLOTTE.HUNTER@sakilacustomer.org");
             expect(response.data.inventory.film.title).toEqual("BLANKET BEVERLY");         
         });
-    })    
+    }),
+
+    it('mock request get all rentals by a customer id', function() {
+        mock.onGet('/rental/2').reply(200, {
+            "rentalId": 1,
+            "rentalDate": 1117145364000,
+            "returnDate": 1117247424000,
+            "customer": {
+                "customerId": 2,
+                "lastName": "JOHNSON",
+                "firstName": "PATRICIA",
+                "email": "PATRICIA.JOHNSON@sakilacustomer.org",
+                "address": null,
+                "store": null
+            },
+            "inventory": null
+        });
+    
+        return instance.get('/rental/2').then(function(response) {
+            expect(response.status).toEqual(200);
+            expect(response.data.rentalId).toEqual(1);
+            expect(response.data.customer.customerId).toEqual(2);       
+        });
+    })
 })
