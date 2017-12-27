@@ -70,9 +70,9 @@ class Manager extends Component {
         return form;
     }
 
-    willDelete = () => {
-        console.log("test");
-        this.props.handleDelete();
+    willDelete = (id) => {
+        this.refs['customersForm'].resetState();
+        this.props.handleDelete(id);
     }
 
     renderDatas = () => {

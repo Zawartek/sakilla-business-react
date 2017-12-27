@@ -32,17 +32,23 @@ class CustomersForm extends Component {
     constructor() {
         super();
         this.state = baseState;
+
+        this.resetState = this.resetState.bind(this);
     }
 
     checkAllField() {
         const state = this.state.formData;
-        return ((state.firstName !== "") && (state.lastName !== "") && (state.email !== "") && (state.address !== "") && (state.city !== "") && (state.country !== "")) ? true : false;
+        return customerFormHelper.verifyAllFields(state);
+    }
+
+    resetState() {
+        this.setState(baseState);
     }
 
     handleOnClickOnAdd = (e) => {
         if (this.checkAllField()) {
             customerService.createCustomer(this.state.formData).then(res => {
-                this.setState(baseState);
+                this.resetState();
                 this.props.reloadDatas();
             })
         }
@@ -54,7 +60,7 @@ class CustomersForm extends Component {
     handleOnClickOnUpdate = (e) => {
         if (this.checkAllField()) {
             customerService.updateCustomer(this.state.formData).then(res => {
-                this.setState(baseState);
+                this.resetState();
                 this.props.reloadDatas();
             })
         }
@@ -64,7 +70,7 @@ class CustomersForm extends Component {
     }
 
     handleOnClickOnReset = (e) => {
-        this.setState(baseState);
+        this.resetState();
     }
 
     handleOnClickOnEdit = (id) => {
