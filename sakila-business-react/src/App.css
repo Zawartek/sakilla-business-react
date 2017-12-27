@@ -49,3 +49,9 @@ form span {
   display: inline-block;
   width: 5em;
 }
+
+#messageErreur {
+  color: red;
+  font-size: 16px;
+  margin-top: 1em;
+}

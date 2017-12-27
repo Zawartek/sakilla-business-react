@@ -14,6 +14,7 @@ const style = {
 
 const baseState = {
     adding: true,
+    errorText: '',
     formData: {
         customerId: -1,
         addressId: -1,
@@ -33,18 +34,33 @@ class CustomersForm extends Component {
         this.state = baseState;
     }
 
+    checkAllField() {
+        const state = this.state.formData;
+        return ((state.firstName !== "") && (state.lastName !== "") && (state.email !== "") && (state.address !== "") && (state.city !== "") && (state.country !== "")) ? true : false;
+    }
+
     handleOnClickOnAdd = (e) => {
-        customerService.createCustomer(this.state.formData).then(res => {
-            this.setState(baseState);
-            this.props.reloadCustomers();
-        })
+        if (this.checkAllField()) {
+            customerService.createCustomer(this.state.formData).then(res => {
+                this.setState(baseState);
+                this.props.reloadDatas();
+            })
+        }
+        else {
+            this.setState({ errorText: "L'ensemble des champs doivent êtres remplis !" });
+        }
     }
 
     handleOnClickOnUpdate = (e) => {
-        customerService.updateCustomer(this.state.formData).then(res => {
-            this.setState(baseState);
-            this.props.reloadDatas();
-        })
+        if (this.checkAllField()) {
+            customerService.updateCustomer(this.state.formData).then(res => {
+                this.setState(baseState);
+                this.props.reloadDatas();
+            })
+        }
+        else {
+            this.setState({ errorText: "L'ensemble des champs doivent êtres remplis !" });
+        }
     }
 
     handleOnClickOnReset = (e) => {
@@ -151,6 +167,7 @@ class CustomersForm extends Component {
                     hintText='Enter your country'
                     className="textfield-class"
                 />
+                <div id="messageErreur">{this.state.errorText}</div>
                 <div>
                     {adding ?
                         <RaisedButton
