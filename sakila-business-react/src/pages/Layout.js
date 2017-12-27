@@ -34,7 +34,7 @@ class Layout extends Component {
           this.state.redirect &&
           <Redirect to={{ pathname: '/login', state: { expired: true } }} />
         }
-        <NavBar/>
+        <NavBar history={this.props.history}/>
         <div style={CONTAINER_STYLE}>
           <Switch>
             <Route exact path="/" component={CustomerManagement} />

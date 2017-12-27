@@ -26,8 +26,9 @@
   font-size: 20px;
 }
 
-.NavBar .link a {
+.NavBar .link .button {
   display: inline-block;
   margin-right: 20px;
+  color: #3F51B5;
   font-size: 18px;
 }
