@@ -10,15 +10,6 @@ import {
     TableHeader
 } from 'material-ui/Table';
 
-const displayCustomerData = (props) => 
-    props.customers.map(c => 
-        <CustomerData 
-        key={c.customerId} {...c} 
-        handleEdit={props.handleEdit}
-        handleDelete={props.handleDelete}
-        />
-    );
-
 const Customers = (props) =>
     <Table>
         <TableHeader
@@ -26,8 +17,12 @@ const Customers = (props) =>
             adjustForCheckbox={false}>
             <CustomerHeader />
         </TableHeader>
-        <TableBody displayRowCheckbox={false} data={props}>
-            {displayCustomerData({ ...props })}
+        <TableBody>
+            <CustomerData 
+                customers={props.customers}
+                handleEdit={props.handleEdit}
+                handleDelete={props.handleDelete}
+            />
         </TableBody>
     </Table>
 
