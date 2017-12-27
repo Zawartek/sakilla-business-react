@@ -56,6 +56,10 @@ class CustomerManagement extends Component {
     this.requestAllCustomers();
   }
 
+  testDelete = (id) => {
+    this.requestDeleteCustomer(id);
+  }
+
   render() {
     return (
       <div style={BACKGROUND_STYLE}>
@@ -65,7 +69,7 @@ class CustomerManagement extends Component {
         managerStyle={CUSTOMER_MANAGEMENT_STYLE}
         datas={this.state.customers}
         reloadDatas={this.reloadCustomers}
-        handleDelete={this.requestDeleteCustomer}
+        handleDelete={this.testDelete}
       />
       </div>
     )

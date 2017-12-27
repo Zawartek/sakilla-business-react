@@ -70,6 +70,11 @@ class Manager extends Component {
         return form;
     }
 
+    willDelete = () => {
+        console.log("test");
+        this.props.handleDelete();
+    }
+
     renderDatas = () => {
         let datas = {}
         if (this.props.loading) {
@@ -91,7 +96,7 @@ class Manager extends Component {
                     datas = (<Customers
                         customers={this.props.datas}
                         handleEdit={this.refs['customersForm'].handleOnClickOnEdit}
-                        handleDelete={this.props.handleDelete}
+                        handleDelete={this.willDelete}
                         />);
                     break;
                 case 'rental' :
