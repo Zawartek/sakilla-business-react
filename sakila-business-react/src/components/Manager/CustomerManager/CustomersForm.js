@@ -47,7 +47,7 @@ class CustomersForm extends Component {
             })
         }
         else {
-            this.setState({ errorText: "L'ensemble des champs doivent êtres remplis !" });
+            this.setState({ errorText: "All fields must be filled !" });
         }
     }
 
@@ -59,7 +59,7 @@ class CustomersForm extends Component {
             })
         }
         else {
-            this.setState({ errorText: "L'ensemble des champs doivent êtres remplis !" });
+            this.setState({ errorText: "All fields must be filled !" });
         }
     }
 
@@ -72,6 +72,7 @@ class CustomersForm extends Component {
         customerService.getCustomer(id).then(res => {
             this.setState({
                 adding: false,
+                errorText: '',
                 formData: {
                     customerId: res.data.customerId,
                     addressId: res.data.address.addressId,
@@ -109,7 +110,7 @@ class CustomersForm extends Component {
     render() {
         const { adding } = this.state
         return (
-            <form>
+            <form id="customerForm">
                 <input type="hidden" value={this.state.formData.customerId} />
                 <input type="hidden" value={this.state.formData.addressId} />
                 <span>Name : </span>

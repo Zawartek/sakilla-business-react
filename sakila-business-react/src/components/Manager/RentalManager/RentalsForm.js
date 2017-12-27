@@ -39,7 +39,7 @@ class RentalsForm extends Component {
 
     render() {
         return (
-        <form>
+        <form id="rentalForm">
             <span>Customer : </span>
             <SelectField
                 key="listCustomers"
