@@ -43,6 +43,20 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return customers;
 	}
+
+	@Override
+	public List<CustomerWO> findAllActiveCustomers() {
+		List<CustomerWO> customers = new LinkedList<CustomerWO>();
+		CustomerWO currentCustomer = null;
+		for (Customer customer : customerRepository.findAllByActive((byte)1)) {
+			currentCustomer = new CustomerWO(customer);
+			currentCustomer.setAddress(new AddressWO(customer.getAddress()));
+			currentCustomer.setStore(new StoreWO(customer.getStore()));
+			customers.add(currentCustomer);
+			log.debug("Customer : " + customer);
+		}
+		return customers;
+	}
 	
 	@Override
 	public CustomerWO findById(int id) {
@@ -100,6 +114,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteCustomerById(int id) {
 		log.debug(String.format("Delete user with Id %s", id));
-		customerRepository.delete(id);
+		Customer customer = customerRepository.findOne(id);
+		customer.setActive((byte)0);
+		customerRepository.save(customer);
 	}
 }

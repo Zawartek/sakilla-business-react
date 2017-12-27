@@ -50,7 +50,7 @@ public class CustomerRestController
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
 	public ResponseEntity<List<CustomerWO>> listAllCustomers()
 	{
-		List<CustomerWO> customers = customerService.findAllCustomers();
+		List<CustomerWO> customers = customerService.findAllActiveCustomers();
 		if (customers.isEmpty())
 		{
 			return new ResponseEntity<List<CustomerWO>>(HttpStatus.NO_CONTENT);

@@ -14,4 +14,6 @@ public interface CustomerService {
 	void deleteCustomerById(int id);
 
 	List<CustomerWO> findAllCustomers();
+
+	List<CustomerWO> findAllActiveCustomers();
 }
