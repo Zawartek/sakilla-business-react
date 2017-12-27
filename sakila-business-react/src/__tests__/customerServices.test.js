@@ -46,5 +46,16 @@ describe('Mock Tests Customer', function() {
           expect(response.data.address.city.city).toEqual('Sasebo');
           expect(response.data.address.city.country.country).toEqual('Japan');
         });
+    }),
+
+    it('mock request get one customer by his id', function() {
+        mock.onGet('/customer/2').reply(200, {
+            "customerId": 2
+        });
+    
+        return instance.get('/customer/2').then(function(response) {
+          expect(response.status).toEqual(200);
+          expect(response.data.customerId).toEqual(2);
+        });
     })    
 })
