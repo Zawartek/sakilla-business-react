@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import * as customerService from '../../../services/customerService';
+import { customerFormHelper } from "../../../helpers/customerFormHelper";
 
 const style = {
     marginTop: 20,
