@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import Manager from '../components/Manager'
 import * as rentalService from '../services/rentalService';
 
-import Rentals from '../components/RentalManager/Rentals'
-import {RentalsForm} from '../components/RentalManager/RentalsForm'
-
 const BACKGROUND_STYLE = {
     display: 'flex',
     alignItems: 'center',
@@ -55,35 +52,23 @@ class RentalManagement extends Component {
   }
 
   reloadRentals = (id) => {
-    {id===-1 ?
-    this.requestAllRentals()
-    :
-    this.requestAllRentalsFromCustomer(id)
+    if (id===-1) {
+      this.requestAllRentals()
+    }
+    else {
+      this.requestAllRentalsFromCustomer(id)
     }
   }
-
-  renderRentals = () =>
-    this.state.loading === true
-    ? 'Loading Rentals ...'
-    :
-    <Rentals
-      rentals={this.state.rentals}
-      />
 
   render() {
     return (
       <div style={BACKGROUND_STYLE}>
         <Manager
-          formHeader="Rental Management Form"
-          listHeader="List of rentals"
+          managerType="rental"
+          loading={this.state.loading}
           managerStyle={RENTAL_MANAGEMENT_STYLE}
-          renderForm={
-            <RentalsForm 
-              ref='rentalsForm'
-              reloadRentals={this.reloadRentals}
-              />
-            }
-          renderDatas={this.renderRentals}
+          datas={this.state.rentals}
+          reloadDatas={this.reloadRentals}
         />
       </div>
     )

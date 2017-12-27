@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import PropTypes from 'prop-types';
 
@@ -43,27 +43,22 @@ const RentalHeader = (props) => (
     </TableRow>
 )
 
-class RentalData extends Component {
-    constructor() {
-        super();
-    }
-
-    render () {
-        const rentalDate =new Date(this.props.rentalDate);
-        const returnDate =new Date(this.props.returnDate);
+const RentalData = (props) => {
+        const rentalDate =new Date(props.rentalDate);
+        const returnDate =new Date(props.returnDate);
         return (
             <TableRow>
-                <TableRowColumn style={col1}>{this.props.rentalId}</TableRowColumn>
+                <TableRowColumn style={col1}>{props.rentalId}</TableRowColumn>
                 <TableRowColumn style={col2}>
-                {this.props.inventory.store &&
-                    <span>{this.props.inventory.store.address.address} - {this.props.inventory.store.address.city.city} {this.props.inventory.store.address.city.country.country}</span>
+                {props.inventory.store &&
+                    <span>{props.inventory.store.address.address} - {props.inventory.store.address.city.city} {props.inventory.store.address.city.country.country}</span>
                 }
-               {this.props.inventory.storeId} 
+               {props.inventory.storeId} 
                 </TableRowColumn>
-                <TableRowColumn style={col3}>{this.props.inventory.film.title}</TableRowColumn>
+                <TableRowColumn style={col3}>{props.inventory.film.title}</TableRowColumn>
                 <TableRowColumn style={col4}>
                     <DatePicker
-                        key="rentalDate"
+                        id={`rentalDate${props.rentalId}`}
                         autoOk={false}
                         floatingLabelText=""
                         defaultDate={rentalDate}
@@ -72,7 +67,7 @@ class RentalData extends Component {
                 </TableRowColumn>
                 <TableRowColumn style={col5}>
                     <DatePicker
-                            key="returnDate"
+                            id={`returnDate${props.rentalId}`}
                             autoOk={false}
                             floatingLabelText=""
                             defaultDate={returnDate}
@@ -80,14 +75,13 @@ class RentalData extends Component {
                         />
                 </TableRowColumn>
                 <TableRowColumn style={col6}>
-                {this.props.customer!=null &&
-                    <span>{this.props.customer.firstName} - {this.props.customer.lastName}</span>
+                {props.customer!=null &&
+                    <span>{props.customer.firstName} - {props.customer.lastName}</span>
                 }
                 </TableRowColumn>
             </TableRow>
         );
     }
-}
 
 RentalData.propTypes = {
     rentalId: PropTypes.number.isRequired

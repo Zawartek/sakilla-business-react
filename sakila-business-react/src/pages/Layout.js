@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import * as authService from '../services/authService';
-
-import ActorManagement from './ActorManagement';
 import CustomerManagement from './CustomerManagement';
 import RentalManagement from './RentalManagement';
 import NavBar from '../components/NavBar';
@@ -41,7 +39,6 @@ class Layout extends Component {
           <Switch>
             <Route exact path="/" component={CustomerManagement} />
             <Route exact path="/CustomerManagement" component={CustomerManagement} />
-            <Route exact path="/ActorManagement" component={ActorManagement} />
             <Route exact path="/RentalManagement" component={RentalManagement} />
           </Switch>
         </div>

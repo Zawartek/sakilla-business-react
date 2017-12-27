@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import * as customerService from '../../services/customerService';
+import * as customerService from '../../../services/customerService';
 
 const style = {
     marginTop: 20,
@@ -30,7 +30,6 @@ class CustomersForm extends Component {
 
     constructor() {
         super();
-
         this.state = baseState;
     }
 
@@ -44,7 +43,7 @@ class CustomersForm extends Component {
     handleOnClickOnUpdate = (e) => {
         customerService.updateCustomer(this.state.formData).then(res => {
             this.setState(baseState);
-            this.props.reloadCustomers();
+            this.props.reloadDatas();
         })
     }
 

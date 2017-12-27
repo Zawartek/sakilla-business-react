@@ -6,9 +6,6 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
-import SelectField from "material-ui/SelectField";
-import MenuItem from 'material-ui/MenuItem';
-
 const style = {
     margin: 2,
 };

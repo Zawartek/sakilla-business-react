@@ -1,19 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import PropTypes from 'prop-types';
 
 import {
     TableHeaderColumn,
     TableRow,
-    TableRowColumn
 } from 'material-ui/Table';
 
-import RaisedButton from 'material-ui/RaisedButton';
-import customerDataHelper from "../../helpers/customerDataHelper";
-
-const style = {
-    margin: 2,
-};
+import customerDataHelper from "../../../helpers/customerDataHelper";
 
 const col1 = {
     width: '5%',
@@ -54,9 +47,5 @@ const CustomerHeader = () => (
 const CustomerData = (props) => (
     customerDataHelper.displayCustomerRow(props)
 )
-
-CustomerData.propTypes = {
-    customerId: PropTypes.number.isRequired
-}
 
 export { CustomerHeader, CustomerData };

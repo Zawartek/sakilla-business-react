@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import Manager from '../components/Manager'
 import * as customerService from '../services/customerService';
 
-import Customers from '../components/CustomerManager/Customers'
-import {CustomersForm} from '../components/CustomerManager/CustomersForm'
-
 const BACKGROUND_STYLE = {
     display: 'flex',
     alignItems: 'center',
@@ -59,32 +56,17 @@ class CustomerManagement extends Component {
     this.requestAllCustomers();
   }
 
-  renderCustomers = () =>
-    this.state.loading === true
-    ? 'Loading Customers ...'
-    :
-    <Customers
-      customers={this.state.customers}
-      handleEdit={this.refs['customersForm'].handleOnClickOnEdit}
-      handleDelete={this.requestDeleteCustomer}
-      reloadCustomers={this.reloadCustomers}
-      />
-
   render() {
     return (
       <div style={BACKGROUND_STYLE}>
-        <Manager
-          formHeader="Customer Management Form"
-          listHeader="List of customers"
-          managerStyle={CUSTOMER_MANAGEMENT_STYLE}
-          renderForm={
-            <CustomersForm 
-              ref='customersForm'
-              reloadCustomers={this.reloadCustomers}
-              />
-            }
-          renderDatas={this.renderCustomers}
-        />
+      <Manager
+        managerType="customer"
+        loading={this.state.loading}
+        managerStyle={CUSTOMER_MANAGEMENT_STYLE}
+        datas={this.state.customers}
+        reloadDatas={this.reloadCustomers}
+        handleDelete={this.requestDeleteCustomer}
+      />
       </div>
     )
   }

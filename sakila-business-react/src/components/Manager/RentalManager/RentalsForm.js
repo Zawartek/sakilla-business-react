@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import * as customerService from '../../services/customerService';
+import * as customerService from '../../../services/customerService';
 
 class RentalsForm extends Component {
     
@@ -28,17 +28,16 @@ class RentalsForm extends Component {
 
     handleChange = (event, index, value) => {
         this.setState({customerId: value});
-        this.props.reloadRentals(value);
+        this.props.reloadDatas(value);
     };
 
     displayCustomers = () => {
-        this.state.customers.map(res =>{
-            <MenuItem value={res.customerId}>{res.firstName} {res.lastName}</MenuItem>
+       this.state.customers.map(res => {
+            return <MenuItem value={res.customerId}>{res.firstName} {res.lastName}</MenuItem>
         })
     }
 
     render() {
-        const customers = this.state;
         return (
         <form>
             <span>Customer : </span>
@@ -49,11 +48,12 @@ class RentalsForm extends Component {
                 value={this.state.customerId}
                 onChange={this.handleChange}
             >
-          <MenuItem value={-1} primaryText="All customers" />
+          <MenuItem key={-1} value={-1} primaryText="All customers" />
           {
               this.state.customers.map((obj, index) => {
                 return ( 
                     <MenuItem 
+                    key={obj.customerId}
                         value={obj.customerId} 
                         primaryText={`${obj.firstName} ${obj.lastName}`}
                         />
