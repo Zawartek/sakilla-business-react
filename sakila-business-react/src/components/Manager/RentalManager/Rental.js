@@ -7,7 +7,6 @@ import {
     TableRow,
     TableRowColumn
 } from 'material-ui/Table';
-import DatePicker from 'material-ui/DatePicker';
 
 const col1 = {
     width: '5%',
@@ -44,8 +43,9 @@ const RentalHeader = (props) => (
 )
 
 const RentalData = (props) => {
-    const rentalDate = new Date(props.rentalDate);
-    const returnDate = new Date(props.returnDate);
+    const rentalDate = new Date(props.rentalDate).toISOString().substr(0, 10);
+    const returnDate = new Date(props.returnDate).toISOString().substr(0, 10);
+
     return (
         <TableRow>
             <TableRowColumn style={col1}>{props.rentalId}</TableRowColumn>
@@ -56,8 +56,8 @@ const RentalData = (props) => {
                 {props.inventory.storeId}
             </TableRowColumn>
             <TableRowColumn style={col3}>{props.inventory.film.title}</TableRowColumn>
-            <TableRowColumn style={col4}>{new Date(props.rentalDate).toISOString().substr(0, 10)}</TableRowColumn>
-            <TableRowColumn style={col5}>{new Date(props.returnDate).toISOString().substr(0, 10)}</TableRowColumn>
+            <TableRowColumn style={col4}>{rentalDate}</TableRowColumn>
+            <TableRowColumn style={col5}>{returnDate}</TableRowColumn>
             <TableRowColumn style={col6}>
                 {props.customer != null &&
                     <span>{props.customer.firstName} - {props.customer.lastName}</span>
