@@ -46,7 +46,7 @@ const customerDataHelper = {
         <TableRow key={customer.customerId}>
         <TableRowColumn style={col1}>{customer.customerId}</TableRowColumn>
         <TableRowColumn style={col2}>
-            <span>{customer.address.address} - {customer.store.address.city.city} {customer.store.address.city.country.country}</span>
+            <span>{customer.store.address.address} - {customer.store.address.city.city} {customer.store.address.city.country.country}</span>
         </TableRowColumn>
         <TableRowColumn style={col3}><span>{customer.firstName} {customer.lastName}</span></TableRowColumn>
         <TableRowColumn style={col4}>{customer.email}</TableRowColumn>
