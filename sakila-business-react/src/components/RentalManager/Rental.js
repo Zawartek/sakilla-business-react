@@ -14,11 +14,11 @@ const col1 = {
 }
 
 const col2 = {
-    width: '55%',
+    width: '35%',
 }
 
 const col3 = {
-    width: '10%',
+    width: '20%',
 }
 
 const col4 = {
@@ -26,17 +26,20 @@ const col4 = {
 }
 
 const col5 = {
+    width: '10%',
+}
+const col6 = {
     width: '20%',
 }
-
 
 const RentalHeader = (props) => (
     <TableRow>
         <TableHeaderColumn style={col1}>ID</TableHeaderColumn>
         <TableHeaderColumn style={col2}>Store address</TableHeaderColumn>
-        <TableHeaderColumn style={col3}>Rental Date</TableHeaderColumn>
-        <TableHeaderColumn style={col4}>Return Date</TableHeaderColumn>
-        <TableHeaderColumn style={col5}>Customer</TableHeaderColumn>
+        <TableHeaderColumn style={col3}>Film</TableHeaderColumn>
+        <TableHeaderColumn style={col4}>Rental Date</TableHeaderColumn>
+        <TableHeaderColumn style={col5}>Return Date</TableHeaderColumn>
+        <TableHeaderColumn style={col6}>Customer</TableHeaderColumn>
     </TableRow>
 )
 
@@ -57,7 +60,8 @@ class RentalData extends Component {
                 }
                {this.props.inventory.storeId} 
                 </TableRowColumn>
-                <TableRowColumn style={col3}>
+                <TableRowColumn style={col3}>{this.props.inventory.film.title}</TableRowColumn>
+                <TableRowColumn style={col4}>
                     <DatePicker
                         key="rentalDate"
                         autoOk={false}
@@ -66,7 +70,7 @@ class RentalData extends Component {
                         disabled={true}
                     />
                 </TableRowColumn>
-                <TableRowColumn style={col4}>
+                <TableRowColumn style={col5}>
                     <DatePicker
                             key="returnDate"
                             autoOk={false}
@@ -75,7 +79,7 @@ class RentalData extends Component {
                             disabled={true}
                         />
                 </TableRowColumn>
-                <TableRowColumn style={col5}>
+                <TableRowColumn style={col6}>
                 {this.props.customer!=null &&
                     <span>{this.props.customer.firstName} - {this.props.customer.lastName}</span>
                 }
