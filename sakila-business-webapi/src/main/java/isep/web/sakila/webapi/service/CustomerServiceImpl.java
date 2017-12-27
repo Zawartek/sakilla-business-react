@@ -89,6 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		customer.setCreateDate(time);
 		customer.setLastUpdate(time);
+		customer.setActive((byte)1);
 		customerRepository.save(customer);
 	}
 
