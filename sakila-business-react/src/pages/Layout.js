@@ -7,6 +7,7 @@ import * as authService from '../services/authService';
 import ActorManagement from './ActorManagement';
 import CustomerManagement from './CustomerManagement';
 import RentalManagement from './RentalManagement';
+import NavBar from '../components/NavBar';
 
 const CONTAINER_STYLE = {
   marginTop: 60,
@@ -35,6 +36,7 @@ class Layout extends Component {
           this.state.redirect &&
           <Redirect to={{ pathname: '/login', state: { expired: true } }} />
         }
+        <NavBar/>
         <div style={CONTAINER_STYLE}>
           <Switch>
             <Route exact path="/" component={CustomerManagement} />
